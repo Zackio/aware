@@ -1,6 +1,6 @@
 {
   "name": "aware",
-  "version": "1.0.0",
+  "version": "0.0.3",
   "main": "main.js",
   "author": "Zack",
   "license": "MIT",
@@ -21,7 +21,8 @@
   "scripts": {
     "start": "electron-forge start",
     "package": "electron-forge package",
-    "make": "electron-forge make"
+    "make": "electron-forge make",
+    "copy": "cp -r out/aware-darwin-x64/aware.app ~/Applications"
   },
   "dependencies": {
     "electron-squirrel-startup": "^1.0.0"
