@@ -1,6 +1,9 @@
 ## Todo
 
-
+@todo does the script run on suspend, if not it does't need to stop the timer, just 
+reset the count.
+@todo Seems to run sound twice after resume - is it not clearning interval timer, maybe it
+doesn't need to run again, maybe it justs needs to reset timer on resum
 
 ## Ideas
 
