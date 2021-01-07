@@ -22,7 +22,8 @@
     "start": "electron-forge start",
     "package": "electron-forge package",
     "make": "electron-forge make",
-    "copy": "cp -r out/aware-darwin-x64/aware.app ~/Applications"
+    "copy": "cp -r out/aware-darwin-x64/aware.app ~/Applications",
+    "lint": "npx eslint --fix"
   },
   "dependencies": {
     "electron-squirrel-startup": "^1.0.0"
