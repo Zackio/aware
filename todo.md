@@ -1,7 +1,5 @@
 ## Todo
 
-@todo Seems to run sound twice after resume - is it not clearning interval timer, maybe it
-doesn't need to run again, maybe it justs needs to reset timer on resum
 
 ## Ideas
 
