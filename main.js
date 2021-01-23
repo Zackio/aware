@@ -1,16 +1,42 @@
 const { powerMonitor } = require('electron')
 const exec = require('child_process').exec
-const interval = 1000
+const Store = require('./config-save.js')
+const { minsToHoursAndMins, msToMinutes } = require('./time.js')
+
+const message = [
+  'consider taking a break',
+  'You\'re pushing it',
+  'Have you fallen down the rabbit hole',
+  'Is this worth getting exhausted for'
+]
 
 let start = Date.now()
-let count = 0
+let count = 25
+let tally = 0
 
-function msToMinutes (millis) {
-  return Math.floor(millis / 60000)
+// First instantiate the class
+const store = new Store({
+  // We'll call our data file 'user-preferences'
+  configName: 'user-preferences',
+  defaults: {
+    tally: 0
+  }
+})
+
+tally = store.get('tally')
+
+const counter = from => {
+  let i = from - 1
+
+  return function () {
+    i = (i + 1) % myArray.length
+    return i
+  }
 }
 
 function say (msg) {
   exec('say ' + msg)
+  console.log(msg)
 }
 
 say('starting aware app')
@@ -21,21 +47,22 @@ const workingLoop = () => {
   if (minutesElapsed === (count + 5)) {
     count += 5
     let msg = `You have been working for ${count} minutes`
-    console.log(msg)
     if (count > 25) {
-      msg += ', Consider taking a break'
+      msg += ', ' + getMessage()
     }
     say(msg)
   }
 }
 
-setInterval(workingLoop, interval)
+setInterval(workingLoop, 1000)
 
 powerMonitor.on('resume', () => {
   say('Resuming')
+  tally += count
+  const time = minsToHoursAndMins(tally) // @todo not working, write test
+  say(`You have been working for ${time.hours} hours and ${time.minutes} minutes`)
   count = 0
   start = Date.now()
-  console.log('resuming')
 })
 
 powerMonitor.on('suspend', () => {
