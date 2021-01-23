@@ -1,6 +1,7 @@
 const { powerMonitor } = require('electron')
-const exec = require('child_process').exec
 const Store = require('./config-save.js')
+const { counter } = require('./counter.js')
+const { say } = require('./aware.lib.js')
 const { minsToHoursAndMins, msToMinutes } = require('./time.js')
 
 const message = [
@@ -25,19 +26,7 @@ const store = new Store({
 
 tally = store.get('tally')
 
-const counter = from => {
-  let i = from - 1
-
-  return function () {
-    i = (i + 1) % myArray.length
-    return i
-  }
-}
-
-function say (msg) {
-  exec('say ' + msg)
-  console.log(msg)
-}
+let indexCounter = counter(0, message.length)
 
 say('starting aware app')
 
@@ -48,7 +37,7 @@ const workingLoop = () => {
     count += 5
     let msg = `You have been working for ${count} minutes`
     if (count > 25) {
-      msg += ', ' + getMessage()
+      msg += ', ' + message[indexCounter()]
     }
     say(msg)
   }
