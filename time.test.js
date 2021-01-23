@@ -1,4 +1,20 @@
-const { minsToHoursAndMins } = require('./time.js')
+const { minsToHoursAndMins, msToMinutes } = require('./time.js')
+
+test('msToMinutes 10ms', () => {
+   expect(msToMinutes(10)).toBe(0)
+})
+
+test('msToMinutes 60000ms', () => {
+   expect(msToMinutes(60000)).toBe(1)
+})
+
+test('msToMinutes 72000', () => {
+   expect(msToMinutes(72000)).toBe(1)
+})
+
+test('msToMinutes 156000, 2.6m to be 2', () => {
+   expect(msToMinutes(156000)).toBe(2)
+})
 
 test('Test 0 hour and 20 minutes', () => {
   const result = minsToHoursAndMins(20)
