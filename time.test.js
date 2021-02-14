@@ -1,19 +1,19 @@
-const { minsToHoursAndMins, msToMinutes } = require('./time.js')
+const { minsToHoursAndMins, msToMinutes, isSameDay } = require('./time.js')
 
 test('msToMinutes 10ms', () => {
-   expect(msToMinutes(10)).toBe(0)
+  expect(msToMinutes(10)).toBe(0)
 })
 
 test('msToMinutes 60000ms', () => {
-   expect(msToMinutes(60000)).toBe(1)
+  expect(msToMinutes(60000)).toBe(1)
 })
 
 test('msToMinutes 72000', () => {
-   expect(msToMinutes(72000)).toBe(1)
+  expect(msToMinutes(72000)).toBe(1)
 })
 
 test('msToMinutes 156000, 2.6m to be 2', () => {
-   expect(msToMinutes(156000)).toBe(2)
+  expect(msToMinutes(156000)).toBe(2)
 })
 
 test('Test 0 hour and 20 minutes', () => {
@@ -34,4 +34,17 @@ test('Test 1 hours and 40 minutes', () => {
 test('Test 2 hours and 25 minutes', () => {
   const result = minsToHoursAndMins(145)
   expect(result).toEqual({ hours: 2, minutes: 25 })
+})
+
+test('Is different day', () => {
+  const date = new Date()
+  const yesterday = new Date('2021-02-11T00:00:00.000Z')
+  const result = isSameDay(yesterday, date)
+  expect(result).toBeFalsy()
+})
+
+test('Is same day', () => {
+  const date = new Date()
+  const result = isSameDay(date, date)
+  expect(result).toBeTruthy()
 })

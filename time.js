@@ -1,3 +1,9 @@
+/**
+ * Older date first
+ */
+exports.isSameDay = (dateOne, dateTwo) => {
+  return (dateOne.setHours(0, 0, 0, 0) - dateTwo.setHours(0, 0, 0, 0) >= 0)
+}
 
 exports.minsToHoursAndMins = timeInMins => {
   const time = {}

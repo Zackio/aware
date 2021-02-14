@@ -1,12 +1,14 @@
 const electron = require('electron')
 const path = require('path')
 const fs = require('fs')
+const debug = require('debug')('aware')
 
 class Store {
   constructor (opts) {
     const userDataPath = (electron.app || electron.remote.app).getPath('userData')
     this.path = path.join(userDataPath, opts.configName + '.json')
     this.data = parseDataFile(this.path, opts.defaults)
+    debug('path', this.path)
   }
 
   get (key) {
